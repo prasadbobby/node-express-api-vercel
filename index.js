@@ -12,20 +12,30 @@ app.get('/', (req, res) => {
 });
 
 app.get('/about', (req, res) => {
-  // Define the file path
-  const filePath = path.join('data.txt');
-
-  // Data to write to the file
-  const data = 'This is some sample data.12121';
-
-  // Write the data to the file
-  fs.writeFile(filePath, data, (err) => {
-    if (err) {
-      console.error('Error writing to file:', err);
-      return;
+  var transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: 'knvdurgaprasad610@gmail.com',
+      pass: 'xjiu okjo agdf uirf'
     }
-    console.log('File written successfully!');
   });
+
+  var mailOptions = {
+    from: 'knvdurgaprasad610@gmail.com',
+    to: 'sejalinfy@gmail.com',
+    subject: 'Sending Email using Node.js',
+    text: 'That was easy!'
+  };
+
+  transporter.sendMail(mailOptions, function(error, info) {
+    if (error) {
+      console.log(error);
+    } else {
+      console.log('Email sent: ' + info.response);
+    }
+  });
+
+
 
   res.send('This is the about page.');
 });
