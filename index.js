@@ -7,7 +7,9 @@ const PORT = 4000
 app.listen(PORT, () => {
   console.log(`API listening on PORT ${PORT} `)
 })
-
+// Counters for different user agents
+let shopifyHookCounter = 0;
+let chromeFirefoxCounter = 0;
 app.get('/', (req, res) => {
   res.send('Welcome to the homepage!');
 });
