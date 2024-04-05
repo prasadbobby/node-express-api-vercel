@@ -81,5 +81,30 @@ app.get('/users', (req, res) => {
   res.json(users);
 });
 
+app.get('/shipping', (req, res) => {
+  const shippingData = {
+    rates: [
+      {
+        service_name: "canadapost-overnight-UBER",
+        service_code: "ON",
+        total_price: "1295",
+        description: "This is the fastest option by far",
+        currency: "CAD",
+        min_delivery_date: "2013-04-12 14:48:45 -0400",
+        max_delivery_date: "2013-04-12 14:48:45 -0400"
+      },
+      {
+        service_name: "fedex-2dayground-UBER",
+        service_code: "2D",
+        total_price: "2934",
+        currency: "USD",
+        min_delivery_date: "2013-04-12 14:48:45 -0400",
+        max_delivery_date: "2013-04-12 14:48:45 -0400"
+      }
+    ]
+  };
+
+  res.json(shippingData);
+});
 // Export the Express API
 module.exports = app
