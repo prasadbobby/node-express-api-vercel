@@ -2,7 +2,7 @@ const express = require('express')
 const nodemailer = require('nodemailer');
 
 const app = express()
-const PORT = 4000
+const PORT = 8080
 
 app.listen(PORT, () => {
   console.log(`API listening on PORT ${PORT} `)
@@ -30,13 +30,13 @@ app.get('/about', (req, res) => {
       service: 'gmail',
       auth: {
         user: 'sejalinfy@gmail.com',
-        pass: '1234'
+        pass: ''
       }
     });
 
     var mailOptions = {
       from: 'sejalinfy@gmail.com',
-      to: 'sejalben.chovatia@infosys.com',
+      to: '',
       subject: 'Sending Email using Node.js',
       text: 'That was easy!'
     };
@@ -106,5 +106,53 @@ app.get('/shipping', (req, res) => {
 
   res.json(shippingData);
 });
+
+app.get('/sample_shipping', (req, res) => {
+  const sampleShippingData = {
+    rates: {
+      service_name: "test service",
+      description: "This is the fastest option by far",
+      service_code: "ABC",
+      currency: "INR",
+      total_price: 100
+    }
+  };
+  res.json(sampleShippingData);
+});
+
+app.get('/shippinginfo', (req, res) => {
+  const shippingInfoData = {
+    rates: [
+      {
+        service_name: "canadapost-overnight",
+        service_code: "ON",
+        total_price: "1295",
+        description: "This is the fastest option by far",
+        currency: "CAD",
+        min_delivery_date: "2013-04-12 14:48:45 -0400",
+        max_delivery_date: "2013-04-12 14:48:45 -0400"
+      },
+      {
+        service_name: "fedex-2dayground",
+        service_code: "2D",
+        total_price: "2934",
+        currency: "USD",
+        min_delivery_date: "2013-04-12 14:48:45 -0400",
+        max_delivery_date: "2013-04-12 14:48:45 -0400"
+      },
+      {
+        service_name: "fedex-priorityovernight",
+        service_code: "1D",
+        total_price: "3587",
+        currency: "USD",
+        min_delivery_date: "2013-04-12 14:48:45 -0400",
+        max_delivery_date: "2013-04-12 14:48:45 -0400"
+      }
+    ]
+  };
+  res.json(shippingInfoData);
+});
+
+ 
 // Export the Express API
 module.exports = app
